@@ -32,7 +32,7 @@ app.get("/products", async(req,res)=>{
         const dairyKefir = await client.query("SELECT * FROM products WHERE flavor_type = $1",['Dairy Kefir']);
         const nonDairyKefir = await client.query("SELECT * FROM products WHERE flavor_type = $1",['Non Dairy Kefir']);
         const fruitInfused = await client.query("SELECT * FROM products WHERE flavor_type = $1",['Fruit Infused']);
-        res.send(herbalTeas.rows);
+        res.send([herbalTeas.rows,dairyKefir.rows,nonDairyKefir.rows,fruitInfused.rows]);
     } catch (error) {
         console.log(error.message);
     }
