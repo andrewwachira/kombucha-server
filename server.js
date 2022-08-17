@@ -46,4 +46,13 @@ app.get("/blogs",async(req,res)=>{
         console.error(error.message)
     }
 })
+
+app.get("/blogs/:id",async (req,res)=>{
+    try{
+        const blog = await client.query("SELECT * FROM blogs WHERE blog_id = $1",[`${req.params.id}`]);
+        res.send(blog.rows[0]);
+    }catch(e){
+        console.error(e.message)
+    }
+})
 app.listen(PORT,console.log(`server started at port: ${PORT}`))
